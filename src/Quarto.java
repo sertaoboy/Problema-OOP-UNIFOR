@@ -4,6 +4,24 @@ public  class Quarto {
     private double taxa;
     private String tipo; // AUXILIO --> COPILOT
     private boolean reservado; // AUXILIO --> COPILOT
+    private String id;
+    private Cliente cliente;
+
+    public Cliente getCliente(){
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente){
+        this.cliente=cliente;
+    }
+
+    public void setId ( String id) {
+        this.id=id;
+    }
+
+    public String getId(){
+        return id;
+    }
 
     public void setTipo(String tipo) {
         this.tipo=tipo;

@@ -2,6 +2,12 @@ import java.util.Scanner;
 
 public class Menu implements Registrar {
     private int opcao;
+    private Hotel hotel;
+
+    public Menu(Hotel hotel){
+        this.hotel=hotel;
+    }
+
 
     public void setOpcao (int opcao) {
         this.opcao=opcao;
@@ -9,6 +15,8 @@ public class Menu implements Registrar {
     public int getOpcao(){
         return opcao;
     }
+
+
 
     @Override
     public void sign() {
