@@ -11,4 +11,4 @@
     * Um hospede pode consumir itens do frigobar. Cada item tem valor e quantidade diferentes. E preciso registrar um consumo
     * Um hospede pode solicitar servico do hotel, como lavanderia, massagem... Da mesma forma do consumo, os servicoes solicitados devem ser registrados
     * Cada quarto tera diarias do meio-dia uma diaria deve ser paga por apenas 1 hospede OU por quem faz a reserva ; Um hospede/cliente pode pagar muitas diarias
-    * E necessario saber o funcionario responsavel pelo ????
+    * E necessario saber o funcionario responsavel pelo <*ilegivel*>
