@@ -4,10 +4,16 @@ import java.util.Scanner;
 public class Hotel implements Menu {
     private ArrayList<Quarto> quartos;
     private ArrayList<Hospede> clientes;
+    private ArrayList<Funcionario> funcionarios;
 
     public Hotel() {
         quartos = new ArrayList<>();
         clientes = new ArrayList<>();
+        funcionarios = new ArrayList<>();
+
+        funcionarios.add(new Funcionario("001", "Bernardo", 0000000));
+        funcionarios.add(new Funcionario("002", "Joao", 0000001));
+
 
         quartos.add(new Quarto("simples",1,true));
         quartos.add(new Quarto("duplo",2,true));
@@ -246,12 +252,78 @@ public class Hotel implements Menu {
         }
     }
 
+    public void servico(){
+        Scanner leitura = new Scanner(System.in);
+        System.out.println("Digite o seu cpf:");
+        String cpfInseridoSERVICO = leitura.nextLine();
+        System.out.println("Insira seu nome: ");
+        String nomeInserido = leitura.nextLine();
+        
+        System.out.println("-----Menu Servicos----");
+        System.out.println("1. Lavanderia");
+        System.out.println("2. Massagem.");
+        System.out.println("Todos os servicos tem o valor de R$20.00");
+        int opcaoSERVICO = leitura.nextInt();
+       for(Hospede clienteSERVICO : clientes) {
+        if(clienteSERVICO.getNome().equals(nomeInserido) && clienteSERVICO.getCpf().equals(cpfInseridoSERVICO)) {
+            if(opcaoSERVICO == 1 || opcaoSERVICO == 2) {
+                clienteSERVICO.adicionarConta(20);
+                System.out.println("Valor da sua conta atualizada: Valor atual: "+clienteSERVICO.getConta());
+            }else {
+                System.out.println("Opcao invalida.");
+            }
+        }
+        return;
+       }
+       System.out.println("Cliente nao encontrado.");
+    }
+
+
+    public void mostraAtendente(){
+        Scanner leitura = new Scanner(System.in);
+        System.out.println("Digite o cpf do cliente");
+        String cpfInseridoCliente = leitura.nextLine();
+        for(Hospede cliente : clientes) {
+            Funcionario atendente = cliente.getAtendente();
+            if(cliente.getCpf().equals(cpfInseridoCliente)) {
+                if(atendente != null) {
+                    System.out.println("O cliente foi atendido por:" + atendente.getNome());
+                }else{
+                    System.out.println("cliente nao foi atendido.");
+                }
+                return;
+            }
+        }
+        System.out.println("Cliente nao encontrado.");
+    }
+
 
     @Override
     public void menu() {
         Scanner leitura = new Scanner(System.in);
+        System.out.println("-------------------------Menu Funcionario------------------------------");
+        System.out.println("Digite seu cpf :");
+        String cpfInseridoFUNCIONARIO = leitura.nextLine();
+        System.out.println("Digite sua matricula:");
+        int matriculaInseridaFUNCIONARIO = leitura.nextInt();
+        leitura.nextLine();
+        System.out.println("Digite seu nome:");
+        String nomeInseridaFUNCIONARIO = leitura.nextLine();
+        boolean funcionarioEncontrado = false;
+        for(Funcionario funcionario : funcionarios) {
+            if(funcionario.getCpf().equals(cpfInseridoFUNCIONARIO) && funcionario.getMatricula()== matriculaInseridaFUNCIONARIO && funcionario.getNome().equals(nomeInseridaFUNCIONARIO)) {
+                funcionarioEncontrado = true;
+                for(Hospede cliente : clientes) {
+                    cliente.setAtendente(funcionario);
+                }
+                break;
+            }
+        }
+        if(!funcionarioEncontrado) {
+            System.out.println("Funcionario nao encontrado.");
+            return;
+        }
         int opcao;
-    
         do {
             System.out.println("----------------------------------Menu----------------------------------");
             System.out.println("Escolha uma opção:");
@@ -261,13 +333,10 @@ public class Hotel implements Menu {
             System.out.println("4. Mostrar informacoes do quarto");
             System.out.println("5. Mostrar informacoes do cliente");
             System.out.println("6. Menu do frigobar.");
-            System.out.println("7. Sair");
-            opcao = leitura.nextInt();
-
-            //
-                //
-            //
-
+            System.out.println("7. Solicitar serivo.");
+            System.out.println("8. Mostrar atendente");
+            System.out.println("9. Sair");
+            opcao = leitura.nextInt(); //
             if (opcao == 1) {
                 registrar();
             }else if(opcao == 2) {
@@ -280,8 +349,12 @@ public class Hotel implements Menu {
                 informacoesCliente();
             }else if (opcao ==6) {
                 adicionaFrigobar();
+            }else if(opcao == 7) {
+                servico();
+            }else if(opcao == 8) {
+                mostraAtendente();
             }
-        } while (opcao !=7);
+        } while (opcao !=9);
     }
 
 }

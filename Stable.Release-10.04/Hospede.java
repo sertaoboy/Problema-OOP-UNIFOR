@@ -5,18 +5,27 @@ public class Hospede {
     private String dataReserva;
     private String dataCheckout;
     private boolean temFrigobar;
+    private Funcionario atendente;
 
 
-    public Hospede(String nome, String cpf, double conta,String dataReserva, String dataCheckout,boolean frigobar){
+    public Hospede(String nome, String cpf, double conta,String dataReserva, String dataCheckout,boolean frigobar, Funcionario atendente){
         this.nome = nome;
         this.cpf = cpf;
         this.conta=conta;
         this.dataReserva=dataReserva;
         this.dataCheckout=dataCheckout;
         this.temFrigobar = frigobar;
+        this.atendente = atendente;
     }
     public Hospede(){
 
+    }
+
+    public void setAtendente(Funcionario a){
+        this.atendente = a;
+    }
+    public Funcionario getAtendente(){
+        return atendente;
     }
 
     public void setTemFrigobar(boolean temFrigobar){
